@@ -3,29 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SEELMTA - RolePlay</title>
+    <title>SEELMTA - Bejelentkezés</title>
     <style>
-        * {
+        body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: #0b0e14;
+            /* Sötét lila színátmenetes háttér */
+            background: linear-gradient(135deg, #1a0033 0%, #0d001a 100%);
+            background-attachment: fixed;
             color: #ffffff;
+            font-family: Arial, sans-serif;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
+            height: 100vh;
         }
 
-        /* Navigáció */
-        nav {
+        /* Felső sáv (ugyanolyan, mint a dashboardon) */
+        .top-bar {
             position: absolute;
             top: 0;
             left: 0;
@@ -33,439 +28,142 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 40px;
-            z-index: 10;
+            padding: 15px 30px;
+            box-sizing: border-box;
+            background-color: #1a1a1a;
+            border-bottom: 2px solid #ff3333;
         }
 
-        .nav-brand {
+        /* Bal felső logó és név (mint a képen) */
+        .top-left {
             display: flex;
             align-items: center;
             gap: 12px;
-            text-decoration: none;
-            color: #ffffff;
-            font-weight: 800;
-            font-size: 18px;
-            letter-spacing: 1px;
         }
-
-        .nav-brand img {
-            width: 30px;
+        .top-left img {
+            width: 35px;
             height: auto;
-            object-fit: contain;
         }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        nav a {
+        .top-left span {
             color: #ffffff;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 15px;
-            transition: color 0.2s;
-        }
-
-        nav a:hover {
-            color: #28a745;
-        }
-
-        nav span {
-            color: #333a48;
+            font-size: 20px;
             font-weight: bold;
         }
 
-        .container {
-            width: 100%;
-            max-width: 1100px;
-            padding: 0 20px 40px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* HERO SECTION */
-        .hero {
-            height: 100vh;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        .site-logo {
-            width: 110px;
-            height: auto;
-            margin-bottom: 20px;
-            object-fit: contain;
-        }
-
-        h1 {
-            font-size: 52px;
-            font-weight: 900;
-            color: #28a745;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-        }
-
-        .subtitle {
-            color: #a0a5b5;
-            font-size: 16px;
-            max-width: 600px;
-            margin: 0 auto 30px auto;
-            line-height: 1.6;
-        }
-
-        /* Gombok */
-        .btn-main {
-            background-color: #28a745;
+        /* Jobb felső Vissza gomb stílusa */
+        .top-right a {
+            background-color: rgba(255, 255, 255, 0.1);
             color: #ffffff;
-            padding: 14px 32px;
-            border-radius: 6px;
+            padding: 8px 15px;
+            border-radius: 5px;
             text-decoration: none;
-            font-weight: 800;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 15px;
-            transition: transform 0.2s, background 0.2s;
+            font-size: 14px;
+            transition: background 0.3s;
+            border: 1px solid #444;
+        }
+        .top-right a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
         }
 
-        .btn-main:hover {
-            transform: translateY(-2px);
-            background-color: #218838;
-        }
-
-        .btn-download {
-            background-color: #28a745;
-            color: #ffffff;
-            padding: 12px 28px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            border: none;
-            font-size: 15px;
-            transition: background 0.2s ease;
-        }
-
-        .btn-download:hover {
-            background-color: #218838;
-        }
-
-        /* Kártyák / Szakaszok */
-        .card {
-            background-color: #121722;
-            border: 1px solid #1a202c;
-            border-radius: 12px;
+        /* Bejelentkező kártya */
+        .login-card {
+            background-color: rgba(18, 18, 18, 0.85);
             padding: 40px;
-            width: 100%;
-            margin-bottom: 25px;
-            scroll-margin-top: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+            width: 300px;
+            text-align: center;
+            border: 1px solid #333;
+            margin-top: 50px; /* Hogy ne takarja ki a felső sáv */
         }
-
-        .join-section {
-            display: flex;
-            gap: 30px;
-            align-items: center;
+        .login-card h2 {
+            margin: 0;
+            color: #ff3333;
         }
-
-        .monitor-box {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .logo-container {
+            margin-bottom: 20px;
         }
-
-        .monitor-box img {
-            width: 100%;
-            max-width: 450px;
+        .logo-container img {
+            width: 80px;
             height: auto;
             display: block;
+            margin: 0 auto 10px auto;
         }
-
-        .join-details {
-            flex: 1.2;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .join-details h2 {
-            font-size: 26px;
-            font-weight: 700;
+        .input-group {
             margin-bottom: 15px;
-            color: #ffffff;
-        }
-
-        .bold-tagline {
-            font-weight: 800;
-            color: #ffffff;
-            font-size: 15px;
-            margin-bottom: 12px;
-            max-width: 450px;
-            line-height: 1.4;
-        }
-
-        .sub-tagline {
-            color: #a0a5b5;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-
-        .steps-list {
-            color: #ffffff;
-            font-size: 14px;
             text-align: left;
-            margin-bottom: 20px;
-            line-height: 2;
-            list-style-position: inside;
         }
-
-        .wish-text {
-            color: #28a745;
-            font-weight: 700;
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
             font-size: 14px;
-            margin-bottom: 20px;
+            color: #ccc;
         }
-
-        /* Rendszerkövetelmények */
-        .specs-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
+        .input-group input {
             width: 100%;
-            margin-bottom: 25px;
+            padding: 10px;
+            border: 1px solid #444;
+            background-color: #2c2c2c;
+            color: #fff;
+            border-radius: 5px;
+            box-sizing: border-box;
         }
-
-        .spec-card h3 {
-            font-size: 20px;
-            margin-bottom: 20px;
-            color: #ffffff;
-        }
-
-        .spec-card ul {
-            padding-left: 20px;
-        }
-
-        .spec-card li {
-            font-size: 14px;
-            margin-bottom: 12px;
-            color: #a0a5b5;
-            line-height: 1.5;
-        }
-
-        .spec-card strong {
-            color: #ffffff;
-        }
-
-        /* Discord Szakasz */
-        .discord-card {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .discord-info h2 {
-            font-size: 24px;
-            margin-bottom: 12px;
-        }
-
-        .discord-info p {
-            color: #a0a5b5;
-            font-size: 14px;
-            margin-bottom: 18px;
-        }
-
-        .discord-list {
-            list-style: none;
-        }
-
-        .discord-list li {
-            color: #ffffff;
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-
-        .discord-list li::before {
-            content: "✓ ";
-            color: #28a745;
-            font-weight: bold;
-            margin-right: 5px;
-        }
-
-        .btn-discord {
-            background-color: #5865f2;
-            color: #ffffff;
-            padding: 12px 26px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .btn-discord:hover {
-            background-color: #4752c4;
-        }
-
-        /* Lábléc */
-        footer {
+        .login-btn {
             width: 100%;
-            max-width: 1100px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 30px 20px;
-            border-top: 1px solid #1a202c;
-            color: #a0a5b5;
-            font-size: 14px;
-        }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            padding: 10px;
+            background-color: #ff3333;
+            border: none;
+            color: white;
             font-weight: bold;
-            color: #ffffff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
         }
-
-        .footer-logo img {
-            width: 25px;
-            height: auto;
-        }
-
-        @media (max-width: 850px) {
-            .join-section {
-                flex-direction: column;
-            }
-            .specs-grid {
-                grid-template-columns: 1fr;
-            }
+        .login-btn:hover {
+            background-color: #cc0000;
         }
     </style>
 </head>
 <body>
-<nav>
-        <a href="index.html" class="nav-brand">
-            <img src="./logo.png" alt="SEELMTA Logo">
-            SEELMTA.HU
-        </a>
-        <div class="nav-links">
-            <a href="ucp.html">UCP </a>
-            <span>|</span>
-            <a href="discord-szabalyzat.html">Discord Szabályzat</a>
-            <span>|</span>
-            <a href="szabalyzat.html">Szerver Szabályzat</a>
-            <span>|</span>
-            <a href="#segitseg-resz">Segítség</a>
-            <span>|</span>
-            <a href="#kozosseg-resz">Közösség</a>
+
+    <!-- Felső sáv a logóval és a Vissza gombbal -->
+    <div class="top-bar">
+        <div class="top-left">
+            <img src="logo.png" alt="SEELMTA Logo">
+            <span>SEELMTA UCP</span>
         </div>
-    </nav>
-    <div class="container">
-        
-        <div class="hero">
-            <img src="./logo.png" alt="SEELMTA Logo" class="site-logo">
-            
-            <h1>SEELMTA</h1>
-            <p class="subtitle">Kezd el a saját RP Karaktered a SEELMTA szerverén, és alakítsd úgy a karaktered - ahogyan szeretnéd!</p>
-            <a href="#segitseg-resz" class="btn-main">► Csatlakozz most</a>
+        <div class="top-right">
+            <a href="index.html">Vissza fő oldalra</a>
         </div>
-
-        <div id="segitseg-resz" class="card join-section">
-            <div class="monitor-box">
-                <img src="./monitor.png" alt="SEELMTA Monitor">
-            </div>
-            <div class="join-details">
-                <h2>Csatlakozás a SEELMTA szerverére</h2>
-                
-                <p class="bold-tagline">Légy részese Magyarország legnagyobb és legoptimalizáltabb GazdagRP közösségének!</p>
-                
-                <p class="sub-tagline">Vágj bele a második életedbe, itt minden lehetséges!</p>
-                
-                <ol class="steps-list">
-                    <li>Grand Theft Auto: San Andreas telepítése</li>
-                    <li>MTA:SA kliens letöltése</li>
-                    <li>MTA:SA kliens indítása</li>
-                    <li>SEELMTA szócska begépelése a keresőbe</li>
-                </ol>
-
-                <p class="wish-text">Kellemes időtöltést kívánunk!</p>
-
-                <a href="https://mtasa.com/" target="_blank" class="btn-download">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
-                    </svg>
-                    MTA:SA letöltése
-                </a>
-            </div>
-        </div>
-
-        <div class="specs-grid">
-            <div class="card spec-card">
-                <h3>Minimum rendszerkövetelmény</h3>
-                <ul>
-                    <li><strong>Operációs rendszer:</strong> Windows 10</li>
-                    <li><strong>CPU:</strong> Intel Core 2 Quad CPU Q6600 @ 2.40GHz (4 CPUs) / AMD Phenom 9850 Quad-Core Processor (4 CPUs) @ 2.5GHz</li>
-                    <li><strong>RAM:</strong> 6GB</li>
-                    <li><strong>Videókártya:</strong> NVIDIA 9800 GT 1GB / AMD HD 4870 1GB</li>
-                    <li><strong>Felbontás:</strong> legalább 1600x900</li>
-                    <li><strong>Tárhely:</strong> 10GB</li>
-                </ul>
-            </div>
-
-            <div class="card spec-card">
-                <h3>Ajánlott rendszerkövetelmény</h3>
-                <ul>
-                    <li><strong>Operációs rendszer:</strong> Windows 10/11</li>
-                    <li><strong>CPU:</strong> Intel Core i5 3470 @ 3.2GHz (4 CPUs) / AMD X8 FX-8350 @ 4GHz (8 CPUs)</li>
-                    <li><strong>RAM:</strong> 12GB</li>
-                    <li><strong>Videókártya:</strong> NVIDIA GTX 660 2GB / AMD HD 7870 2GB</li>
-                    <li><strong>Felbontás:</strong> legalább 1920x1080</li>
-                    <li><strong>Tárhely:</strong> 15GB (SSD)</li>
-                </ul>
-            </div>
-        </div>
-
-        <div id="kozosseg-resz" class="card discord-card">
-            <div class="discord-info">
-                <h2>Csatlakozz Discord szerverünkre</h2>
-                <p>Légy részese a legaktívabb MTA közösségnek! Kérdezz, beszélgess más<br>játékosokkal, értesülj az eseményekről első kézből.</p>
-                <ul class="discord-list">
-                    <li>Közvetlenül tudsz beszélni a vezetőséggel</li>
-                    <li>Eseményekkel és a versenyekkel tisztában leszel</li>
-                    <li>Amennyiben valamit szeretnél jelenteni itt tudod megtenni</li>
-                </ul>
-            </div>
-            <div>
-                <a href="https://discord.gg/tVzp7sYgv" target="_blank" class="btn-discord">
-                    <svg width="20" height="20" viewBox="0 0 127.14 96.36" fill="#ffffff">
-                        <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0,3.36,6.83A97.68,97.68,0,0,0,42.29,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1,-10.85,-5.18c.91,-0.66,1.8,-1.34,2.66,-2a74.57,74.57,0,0,0,64.3,0c.87.68,1.76,1.36,2.66,2a68.68,68.68,0,0,1,-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19,-16.14c2.64,-27.38,-4.51,-51.11,-18.88,-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53s5,-12.74,11.43,-12.74S54,45.92,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5.06,-12.74,11.44,-12.74S96.23,45.92,96.12,53,91.08,65.69,84.69,65.69Z"/>
-                    </svg>
-                    Csatlakozás
-                </a>
-            </div>
-        </div>
-
     </div>
 
-    <footer>
-        <div class="footer-logo">
-            <img src="./logo.png" alt="SEELMTA Logo">
-            SEELMTA
+    <!-- Bejelentkező doboz -->
+    <div class="login-card">
+        <div class="logo-container">
+            <img src="logo.png" alt="SEELMTA Logo">
+            <h2>SEELMTA</h2>
         </div>
-        <div>A legmodernebb magyar RolePlay közösség © 2026</div>
-    </footer>
 
+        <form id="loginForm" onsubmit="handleLogin(event)">
+            <div class="input-group">
+                <label for="username">Felhasználónév</label>
+                <input type="text" id="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Jelszó</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit" class="login-btn">Bejelentkezés</button>
+        </form>
+    </div>
+
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            localStorage.setItem('seelmta_user', username);
+            window.location.href = 'dashboard.html';
+        }
+    </script>
 </body>
 </html>
