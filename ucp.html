@@ -156,11 +156,18 @@
     </div>
 
     <script>
-        async function handleLogin(event) {
+        function handleLogin(event) {
             event.preventDefault();
-            alert('A rendszer készen áll a backend csatlakoztatására!');
+            
+            // Lekérjük a beírt felhasználónevet
+            const username = document.getElementById('username').value;
+            
+            // Elmentjük a böngészőbe, hogy a dashboard ki tudja olvasni
+            localStorage.setItem('seelmta_user', username);
+            
+            // Átirányítunk a dashboardra
+            window.location.href = 'dashboard.html';
         }
     </script>
-
 </body>
 </html>
